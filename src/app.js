@@ -1,29 +1,10 @@
 import React from 'react';
+import Router from 'react-router';
 import App from './components/App'
+import routes from './routes';
 
 let path = decodeURI(window.location.pathname);
 
-function run() {
-  // Render the top-level React component
-  let props = {
-    path: path,
-    context: {
-      onSetTitle: value => document.title = value,
-    }
-  };
-  let element = React.createElement(App, props);
-  React.render(element, document.getElementById('app'), () => {
-  });
-}
-
-// Run the application when both DOM is ready
-// and page content is loaded
-Promise.all([
-  new Promise((resolve) => {
-    if (window.addEventListener) {
-      window.addEventListener('DOMContentLoaded', resolve);
-    } else {
-      window.attachEvent('onload', resolve);
-    }
-  }),
-]).then(run);
+Router.run(routes, Router.HistoryLocation, (Handler) => {
+  React.render(<Handler params={{}} />, document.getElementById("app"));
+});

@@ -16,7 +16,8 @@
     "babel": "^5.5.8",
     "express": "^4.12.4",
     "lodash": "^3.9.3",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
   },
   "devDependencies": {
     "babel-core": "^5.5.8",
