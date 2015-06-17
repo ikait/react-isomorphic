@@ -7,7 +7,8 @@ import {Route, DefaultRoute} from 'react-router';
 let routes = (
   <Route name="app" path="/" handler={App}>
     <Route name="about" handler={About} />
-    <DefaultRoute name="top" handler={Top} />
+    <Route name="top" handler={Top} />
+    <DefaultRoute handler={Top} />
   </Route>
 )
 

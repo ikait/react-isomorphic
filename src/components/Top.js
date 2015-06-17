@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Top {
+class Top extends React.Component {
   render() {
     return (
       <div>

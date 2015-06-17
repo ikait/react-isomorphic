@@ -9,6 +9,7 @@ import bg from 'gulp-bg';
 const $ = gulpLoadPlugins();
 const argv = minimist(process.argv.slice(2));
 const src = Object.create(null);
+let watch = false;
 
 // Resource files
 gulp.task('resources', () => {
@@ -50,10 +51,26 @@ gulp.task('bundle', cb => {
     }
   }
 
-  bundler.run(bundle);
+  if (watch) {
+    bundler.watch(200, bundle);
+  } else {
+    bundler.run(bundle);
+  }
 });
+
 
 // Build the app from source code
 gulp.task('build', ['resources', 'bundle']);
 
-gulp.task("server", bg("node", "build/server.js"));
+// Build and start watching for modifications
+gulp.task('build:watch', cb => {
+  watch = true;
+  gulp.watch([
+    'src/*.js',
+    'src/components/*.js',
+    'src/templates*/**'
+  ], ['build']);
+  cb();
+});
+
+gulp.task("serve", bg("node", "build/server.js"));
